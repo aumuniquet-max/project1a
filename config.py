@@ -1,8 +1,9 @@
-from dataclasses import dataclass 
-from typing import Final, Tuple 
+#THIS SCRIPT CREATES IMMUTABLE CONFIGURATION FOR BINNING AND OTHER SETTINGS
+from dataclasses import dataclass
+from typing import Final, Tuple
 
 @dataclass(frozen=True)
-class Config: 
+class Config:
     """AGE IS IN YEARS, BINNING INTO 10 YEAR INTERVALS, UP TO 100 YEARS.
 CHUNK SIZE = 250 ROWS AT A TIME, TO AVOID MEMORY ISSUES"""
     sample_id: str
@@ -20,5 +21,5 @@ CONFIG: Final[Config] = Config(
     bin_labels=('0-20', '21-40', '41-60', '61-80', '81-100'),
     chunk_size= 250,
     separator='\t'
-) 
+)
 

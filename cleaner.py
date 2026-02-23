@@ -1,4 +1,5 @@
-import pandas as pd 
+#THIS SCRIPTS CLEANS DATA TO THREE NECESSARY COLUMNS
+import pandas as pd
 df = pd.read_csv('clinical.tsv', sep='\t', low_memory=False) #FIX MIX OF DTYPE
 selected_columns = {'cases.case_id': 'Case ID', 'demographic.age_at_index': 'Age', 'diagnoses.primary_diagnosis': 'Diagnosis'}
 df_filtered = df[list(selected_columns.keys())].copy()
@@ -15,7 +16,7 @@ df_filtered['Diagnosis'] = df_filtered['Diagnosis'].str.replace(', NOS', '', cas
 
 
 
-#REMOVE UNWANTED DIAGNOSES 
+#REMOVE UNWANTED DIAGNOSES
 EXCLUDE = ['not reported', 'diagnosis', "'--"]
 
 df_filtered = df_filtered[
