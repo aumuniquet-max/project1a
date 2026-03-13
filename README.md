@@ -220,7 +220,7 @@ Project 1/
 
 ## Author
 
-**Aumunique**  
+**Aumunique Page**  
 Self-directed project — TCGA-BRCA transcriptomic analysis  
 Built from scratch as part of a self-directed bioinformatics curriculum.
 
