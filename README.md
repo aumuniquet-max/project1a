@@ -97,7 +97,7 @@ clinical.tsv                          GDC expression TSVs (per sample)
 
 ---
 
-## Part 2 — Expression Assembly Layer 🔧 In Progress
+## Part 2 — Expression Assembly Layer ✅ Complete
 
 **Input:** 1,000+ per-sample STAR Counts TSVs; `files_2026-02-25.json` (GDC file-to-case mapping)  
 **Output:** `combined_expression.tsv` — long-format table with columns `Case ID`, `gene_id`, `gene_name`, `gene_type`, `tpm_unstranded`
@@ -108,7 +108,7 @@ Each per-sample file contains ~60,000 rows. Accumulating all samples in memory s
 
 ---
 
-## Part 3 — Integration Layer
+## Part 3 — Integration Layer 🔧 In Progress
 
 Intersects `Case ID` values between the cohort table (Part 1) and the expression matrix (Part 2). Samples present in one source but absent in the other are dropped. Output is a matched pair: a filtered count matrix and a filtered design table with identical sample ordering.
 
@@ -199,6 +199,29 @@ Project 1/
     ├── combiner_exp.py        # Expression assembly (write-to-disk)
     └── pipeline2.py           # Part 2 pipeline entry point
 ```
+Project 1/
+├── config.py                  # Immutable pipeline configuration
+├── cleaner.py                 # One-time clinical data cleaning
+├── cleaner_clinical.tsv       # Cleaned cohort (1,062 patients)
+├── chunker.py                 # Chunked TSV reader (generator)
+├── mapper.py                  # Per-chunk transformation logic
+├── reducer.py                 # Aggregation and verification
+├── pipeline.py                # Part 1 pipeline entry point
+│
+└── Project 2/
+    ├── expression_config.py   # Expression-specific config
+    ├── expression_chunker.py  # Per-sample file reader
+    ├── expression_mapper.py   # Per-sample transformation
+    ├── combiner_exp.py        # Expression assembly (write-to-disk)
+    └── pipeline2.py           # Part 2 pipeline entry point
+    │
+    └── Project 3/
+            ├── integrate.py            # Integration layer
+            ├── cleaner_clinical.tsv    # Import from part 1
+            ├── combined_expression.tsv # Output from part 2
+            ├── filtered_clinical.tsv   # Output
+            ├── filtered_expression.tsv # Output
+            └── pipeline3.py            # Part 3 pipeline entry point
 
 ---
 
@@ -207,8 +230,8 @@ Project 1/
 | Part | Status | Notes |
 |---|---|---|
 | 1 — Cohort Definition | ✅ Complete | 1,062 patients, 55 diagnosis × age group combinations |
-| 2 — Expression Assembly | 🔧 In progress | Rewriting to eliminate memory accumulation |
-| 3 — Integration | ⬜ Pending | Awaiting Part 2 output |
+| 2 — Expression Assembly | ✅ Complete | Filtered expression rows: 72,064,080 |
+| 3 — Integration |🔧 In Progress | Awaiting Part 2 output |
 | 4 — DE Logic | ⬜ Pending | Design finalized |
 | 5 — Generalization | ⬜ Pending | Architecture defined |
 | 6 — MapReduce | ⬜ Pending | Architecture defined |
