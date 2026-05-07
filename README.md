@@ -108,13 +108,13 @@ Each per-sample file contains ~60,000 rows. Accumulating all samples in memory s
 
 ---
 
-## Part 3 — Integration Layer 🔧 In Progress
+## Part 3 — Integration Layer  ✅ Complete
 
 Intersects `Case ID` values between the cohort table (Part 1) and the expression matrix (Part 2). Samples present in one source but absent in the other are dropped. Output is a matched pair: a filtered count matrix and a filtered design table with identical sample ordering.
 
 ---
 
-## Part 4 — Differential Expression Logic Layer
+## Part 4 — Differential Expression Logic Layer ✅ Complete
 
 For each primary diagnosis, and separately for each sex:
 
@@ -128,7 +128,7 @@ This layer does not apply a statistical model in its current form. It is designe
 
 ---
 
-## Part 5 — Generalization Layer
+## Part 5 — Generalization Layer 🔧 In Progress
 
 The system is schema-agnostic. No column name is hardcoded in any processing script. All field names, file paths, bin definitions, and filter criteria are specified in a frozen configuration object. To apply this pipeline to a non-BRCA TCGA project, a GEO dataset, or a custom clinical cohort, the user edits the config and supplies the appropriate input files — no logic changes are required.
 
